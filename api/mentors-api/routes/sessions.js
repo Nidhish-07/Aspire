@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/", verifyToken, createSession);
 router.delete("/:id", verifyToken, deleteSession);
 router.post("/:id", verifyToken, updateSession);
-router.get("/:id", getSession);
+router.get("/single/:id", getSession);
 router.get("/", getSessions);
 
 export default router;
