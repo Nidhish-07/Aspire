@@ -21,34 +21,40 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const mentor = Mentor.findOne({ username: req.body.username });
+    const mentor = await Mentor.findOne({ username: req.body.username });
 
     if (!mentor) {
-      return next(createError(404, "User not found"));
+      return next(createError(404, "mentor not found"));
     }
 
-    const validPassword = bcrypt.compareSync(req.body.password, user.password);
+    const validPassword = bcrypt.compareSync(
+      req.body.password,
+      mentor.password
+    );
 
     if (!validPassword) {
       return next(createError(400, "Wrong Credentials"));
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.SECRET);
-    const { password, ...otherDetails } = user._doc;
-
+    const token = jwt.sign({ id: mentor._id }, process.env.SECRET);
+    const { password, ...otherDetails } = mentor._doc;
+    // console.log(token);
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
       .json(otherDetails);
-  } catch (error) {}
+  } catch (error) {
+    next(createError(500, ""));
+    console.log(error);
+  }
 };
 
 export const logout = async (req, res) => {
   res
-    .clearCookie("accessToken", {
+    .clearCookie("access_token", {
       sameSite: "none",
       secure: true,
     })
     .status(200)
-    .send("User has been logged out.");
+    .send("mentor has been logged out.");
 };
