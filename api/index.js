@@ -12,9 +12,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 
-import mentorRoute from "./mentors-api/routes/mentors.js";
-import sessionRoute from "./mentors-api/routes/sessions.js";
-import authRoute from "./mentors-api/routes/auth.js";
+import mentorRoute from "./routes/mentors.js";
+import sessionRoute from "./routes/sessions.js";
+import authRoute from "./routes/auth.js";
 
 const app = express();
 app.use(helmet());
