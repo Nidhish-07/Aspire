@@ -19,3 +19,22 @@ export const deleteMentor = async (req, res, next) => {
   await Mentor.findByIdAndDelete(req.params.id);
   res.status(200).send("Mentor has been deleted");
 };
+
+export const updateMentor = async (req, res, next) => {
+  if (req.params.id === req.mentorId) {
+    try {
+      const updatedMentor = await Mentor.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+
+      res.status(200).send(updatedMentor);
+    } catch (error) {
+      console.log(error);
+      next(createError(500, ""));
+    }
+  }
+};
