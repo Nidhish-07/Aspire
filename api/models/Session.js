@@ -27,7 +27,7 @@ const sessionSchema = new mongoose.Schema(
       required: true,
     },
     categories: {
-      type: [String],
+      type: String,
       required: true,
     },
     medium: {
