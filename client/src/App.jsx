@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
@@ -14,6 +13,8 @@ import SignUp from "./components/SignUp";
 import ResetPassword from "./components/ResetPassword";
 import Mentors from "./pages/Mentor";
 import OnlineTution from "./pages/OnlineTution";
+import Sessions from "./pages/Sessions";
+import SessionInfo from "./pages/SessionInfo";
 
 const App = () => {
   return (
@@ -39,6 +40,8 @@ const App = () => {
             //</RequireAuth>
           }
         />
+        <Route path="/sessions" element={<Sessions />} />
+        <Route path="/session-info/:id" element={<SessionInfo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/singup" element={<SignUp />} />
