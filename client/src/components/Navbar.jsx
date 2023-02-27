@@ -81,6 +81,9 @@ const Navbar = () => {
               <li className="text-white hover:text-indigo-200">
                 <Link to="/mentor">Mentors</Link>
               </li>
+              <li className="text-white hover:text-indigo-200">
+                <Link to="/sessions">Sessions</Link>
+              </li>
               {localStorage.getItem("currentUser") && (
                 <li className="text-white hover:text-indigo-200">
                   <Link to="/add-job">Add Session</Link>
