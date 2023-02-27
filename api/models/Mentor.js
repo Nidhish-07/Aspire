@@ -13,7 +13,7 @@ const mentorSchema = new mongoose.Schema(
       unique: true,
     },
     password: {
-      type: String, 
+      type: String,
       required: true,
       min: 6,
     },
