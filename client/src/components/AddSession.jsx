@@ -271,62 +271,41 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import newRequest from "../utils/newRequest";
 
 const AddSession = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [desc, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   // const [recommended, setRecommended] = useState([/]);
   const [categories, setCategories] = useState([]);
   const [medium, setMedium] = useState("");
 
-  // const handleTitleChange = (event) => {
-  //   setTitle(event.target.value);
-  // };
-
-  // const handleDescriptionChange = (event) => {
-  //   setDescription(event.target.value);
-  // };
-
-  // const handleStartDateChange = (event) => {
-  //   setStartDate(event.target.value);
-  // };
-
-  // const handleEndDateChange = (event) => {
-  //   setEndDate(event.target.value);
-  // };
-
-  // const handleRecommendedChange = (event) => {
-  //   setRecommended(event.target.checked);
-  // };
-
-  // const handleCategoriesChange = (event) => {
-  //   const options = event.target.options;
-  //   const selectedCategories = [];
-  //   for (let i = 0; i < options.length; i++) {
-  //     if (options[i].selected) {
-  //       selectedCategories.push(options[i].value);
-  //     }
-  //   }
-  //   setCategories(selectedCategories);
-  // };
-
-  // const handleMediumChange = (event) => {
-  //   setMedium(event.target.value);
-  // };
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    a;
+    try {
+      await newRequest.post("/session", {
+        title,
+        desc,
+        startDate,
+        endDate,
+        categories,
+        medium,
+      });
+
+      alert("submitted");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 pt-12">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full sm:w-3/4 lg:w-1/2 xl:w-1/3">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Add Session</h2>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
               htmlFor="title"
@@ -353,7 +332,7 @@ const AddSession = () => {
             <textarea
               id="description"
               placeholder="Enter the event description"
-              value={description}
+              value={desc}
               onChange={(e) => setDescription(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
@@ -404,12 +383,7 @@ const AddSession = () => {
               id="categories"
               placeholder="Enter Your categories"
               value={categories}
-              onChange={(e) =>
-                setCategories((prevCategories) => [
-                  ...prevCategories,
-                  e.target.value,
-                ])
-              }
+              onChange={(e) => setCategories(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
